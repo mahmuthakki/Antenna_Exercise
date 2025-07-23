@@ -83,9 +83,20 @@ patternCustom(AF_mag_db, theta, phi, CoordinateSystem="rectangular",Slice="phi",
 hold on
 patternCustom(AF_mag_db, theta, phi, CoordinateSystem="rectangular",Slice="phi", SliceValue=90);
 hold off
-title("Array Factor for Phi Angles")
-legend(["\phi = " + num2str(angle_1) + "°", "\phi = " + num2str(angle_2) + "°", "\phi = " + num2str(angle_3) + "°"]);
+title("Array Factor for Phi Values")
 
+% figure
+% plot(theta,mag2db(AF_mag(index_phi_1,:)))
+% hold on
+% plot(theta,mag2db(AF_mag(index_phi_2,:)))
+% hold on
+% plot(theta,mag2db(AF_mag(index_phi_3,:)))
+% hold off
+% legend(["\phi = " + num2str(angle_1) + "°", "\phi = " + num2str(angle_2) + "°", "\phi = " + num2str(angle_3) + "°"]);
+% title("Array Factor for Phi Angles")
+% xlabel("Theta(deg)")
+% ylabel("|AF|(dB)")
+% ylim([-70 0])
 
 % Element Factor
 
@@ -93,8 +104,9 @@ ef = cos(THETA);
 ef(:,upper_bound_theta:end) = 0.01;
 
 
-patternCustom(ef, theta, phi, CoordinateSystem="rectangular",Slice="phi", SliceValue=angle_1);
+plot(theta,ef(1,:))
 title("Element Factor")
+xlabel("Theta(deg)")
 
 
 figure
@@ -114,15 +126,21 @@ patternCustom(AF_total_db,theta,phi)
 title("AF X EF Result")
 
 figure
-patternCustom(AF_total_db, theta, phi, CoordinateSystem="rectangular",Slice="phi", SliceValue=angle_1);
-hold on
-patternCustom(AF_total_db, theta, phi, CoordinateSystem="rectangular", Slice="phi", SliceValue=angle_2);
-hold on
-patternCustom(AF_total_db, theta, phi, CoordinateSystem="rectangular", Slice="phi", SliceValue=angle_3);
-hold off
+patternCustom(AF_total_db, theta, phi, CoordinateSystem="rectangular",Slice="phi", SliceValue=0);
 title("AF X EF Result")
-legend(["\phi = " + num2str(angle_1) + "°", "\phi = " + num2str(angle_2) + "°", "\phi = " + num2str(angle_3) + "°"]);
 
+% figure
+% plot(theta,mag2db(AF_total(index_phi_1,:)))
+% hold on
+% plot(theta,mag2db(AF_total(index_phi_2,:)))
+% hold on
+% plot(theta,mag2db(AF_total(index_phi_3,:)))
+% hold off
+% legend(["\phi = " + num2str(angle_1) + "°", "\phi = " + num2str(angle_2) + "°", "\phi = " + num2str(angle_3) + "°"]);
+% title("AF X EF for Phi Angles")
+% xlabel("Theta(deg)")
+% ylabel("|AF|X|EF|(dB)")
+% ylim([-70 0])
 
 
 % E field and intensity of array 
@@ -149,5 +167,5 @@ title("Gain")
 
 figure
 patternCustom(Gain_db, theta, phi, CoordinateSystem="rectangular",Slice="phi", SliceValue=0);
-title("Gain")
+
 
